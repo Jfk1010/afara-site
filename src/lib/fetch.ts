@@ -19,9 +19,9 @@ export async function contentful_fetch(query: string) {
     body: JSON.stringify({ query }),
   })
 
-  const { data, error } = await response.json()
+  const { data, errors } = await response.json()
 
-  if (error) throw error
+  if (errors) throw errors
   if (!data) throw kit_error(404, `No data found`)
 
   return data

@@ -48,6 +48,18 @@ jobs:
           VITE_ALGOLIA_SEARCH_KEY: ${{ secrets.VITE_ALGOLIA_SEARCH_KEY }}
           VITE_GOOGLE_MAPS_API_KEY: ${{ secrets.VITE_GOOGLE_MAPS_API_KEY }}
 
+      - name: Verify build output
+        run: |
+          if [ ! -d "build" ]; then
+            echo "Build output directory not found!"
+            echo "Contents of current directory:"
+            ls -la
+            exit 1
+          fi
+          echo "Build output verified:"
+          du -sh build/
+          ls -la build/
+
       - name: Upload build artifact
         uses: actions/upload-pages-artifact@v3
         with:

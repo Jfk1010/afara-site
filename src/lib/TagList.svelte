@@ -25,6 +25,7 @@
     Kooperationen: `fa-solid:hands-helping`,
     Treffen: `ic:beach-access`,
   }
+  const tag_entries = Object.entries(tagCounter) as [BlogTag, number][]
 
   let open = false
   let windowWidth: number
@@ -47,7 +48,7 @@
 </h2>
 {#if windowWidth > 750 || open}
   <ul transition:slide>
-    {#each Object.entries(tagCounter) as [tag, count]}
+    {#each tag_entries as [tag, count] (tag)}
       <li>
         <button
           transition:fade
@@ -55,8 +56,8 @@
           class:active={activeTag === tag}
           on:click={() => (activeTag = tag)}
         >
-          <svelte:component
-            this={icons[tag]}
+          <Icon
+            icon={icons[tag]}
             style="height: 2.2ex; vertical-align: -3pt; margin-right: 6pt"
           />
           {tag} ({count})
